@@ -5,7 +5,7 @@ import container from 'src/container';
 import { ConversationInfo } from 'src/domain/conversation';
 import { addConversation } from '../../consersationState/actions';
 import { useChat } from '../../consersationState/store';
-import Panel from '../User/Panel';
+import Header from './Header';
 import ListConversation from './ListConversation';
 import ListSearchTile from './ListSearchTile';
 import SearchBar from './SearchBar';
@@ -77,7 +77,7 @@ const ChatList: FC = () => {
 
     return (
         <div className="flex flex-col w-1/4 max-h-screen">
-            <Panel />
+            <Header />
             <SearchBar
                 searchOnFocus={searchOnFocus}
                 searchOutFocus={searchOutFocus}

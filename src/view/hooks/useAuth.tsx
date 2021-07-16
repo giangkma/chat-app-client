@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 // import * as R from 'ramda';
 import React, { ReactNode, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import socket from 'src/config/SOCKET_CONFIG';
 import container from 'src/container';
 import { DataLogin, DataRegister, User } from 'src/domain/user';
+import { Screen } from '../routes/Router';
 
 interface AuthContext {
     isAuthenticated: boolean;
@@ -12,6 +14,7 @@ interface AuthContext {
     setUser: (user: User) => void;
     onLogin: (data: DataLogin) => void;
     onRegister: (data: DataRegister) => void;
+    onLogout: () => void;
 }
 
 const {
@@ -25,6 +28,7 @@ export const AuthContext = React.createContext<AuthContext>({
     setUser: () => {},
     onLogin: () => {},
     onRegister: () => {},
+    onLogout: () => {},
 });
 
 export const useAuth = (): AuthContext => React.useContext(AuthContext);
@@ -60,6 +64,13 @@ export const AuthProvider = ({
         localStorage.setItem('userId', res.information._id);
     };
 
+    const onLogout = (): void => {
+        localStorage.removeItem('username');
+        localStorage.removeItem('userId');
+        authService.removeToken();
+        setIsAuthenticated(false);
+    };
+
     useEffect(() => {
         (async (): Promise<void> => {
             const accessToken = await authService.getToken();
@@ -84,6 +95,7 @@ export const AuthProvider = ({
                 setUser,
                 onLogin,
                 onRegister,
+                onLogout,
             }}
         >
             {children}

@@ -12,7 +12,12 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
 }
-
+aside.emoji-picker-react {
+    position: absolute !important;
+    width: 500px !important;
+    bottom: 90px;
+    right: 25px;
+}
 .categoryChips::-webkit-scrollbar {
     display: none;
 }

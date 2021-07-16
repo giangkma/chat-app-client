@@ -32,7 +32,7 @@ export const ChangePassFormSchema = yup.object({
 
 export const RegisterFormSchema = yup
     .object({
-        name: yup.string().required('Hãy nhập tên'),
+        // name: yup.string().required('Hãy nhập tên'),
     })
     .concat(LoginFormSchema);
 

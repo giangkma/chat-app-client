@@ -14,6 +14,7 @@ export interface User {
     username: string;
     idOnline: boolean;
     avatar?: string;
+    name: string;
     dateAdded: string;
 }
 

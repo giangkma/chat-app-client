@@ -13,8 +13,6 @@ const ListSearchTile: FC<IProps> = ({
     openConversation,
     setMouse,
 }) => {
-    console.log(listResults);
-
     return (
         <div
             className="px-2 mr-1 overflow-y-auto"

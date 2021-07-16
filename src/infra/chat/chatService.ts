@@ -16,11 +16,11 @@ export class ChatService {
         this.authService = authService;
     }
 
-    async getConversationList(): Promise<any> {
+    async getConversationList(userId: string): Promise<any> {
         // get auth token
         const token = await this.authService.getToken();
         const res = await this.apiService.authGet({
-            url: `conversation-list?id=${localStorage.userId}`,
+            url: `conversation-list?id=${userId}`,
             userToken: { authToken: token },
         });
 

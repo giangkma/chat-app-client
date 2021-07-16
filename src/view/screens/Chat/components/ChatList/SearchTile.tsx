@@ -10,7 +10,7 @@ type IProps = {
 const SearchTile: FC<IProps> = ({ id, username, openConversation }) => {
     return (
         <div
-            className="flex max-w-full hover:bg-gray-300 rounded-lg cursor-pointer"
+            className="flex max-w-full hover:bg-gray-300 rounded-lg cursor-pointer items-center"
             onClick={(): void => {
                 openConversation(id);
             }}
@@ -20,7 +20,7 @@ const SearchTile: FC<IProps> = ({ id, username, openConversation }) => {
                 className="h-12 w-12 mx-4 p-1 rounded-full"
                 alt="avatar"
             />
-            <div className="hidden md:flex flex-col h-full justify-center items-center overflow-hidden">
+            <div className="hidden md:flex flex-col h-full justify-center items-center overflow-hidden ">
                 <span className="text-base truncate">{username}</span>
             </div>
         </div>

@@ -27,7 +27,9 @@ const ChatStore = ({ children }: { children: ReactNode }): JSX.Element => {
 
     useEffect(() => {
         (async function fetchData(): Promise<void> {
-            const res = await chatService.getConversationList();
+            const { userId } = localStorage;
+            if (!userId) return;
+            const res = await chatService.getConversationList(userId);
             if (!res.list.length) {
                 localStorage.removeItem('chattoken');
                 localStorage.removeItem('username');

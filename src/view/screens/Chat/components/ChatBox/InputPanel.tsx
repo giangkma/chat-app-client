@@ -1,11 +1,15 @@
+import { IEmojiPickerProps } from 'emoji-picker-react';
 import React, { FC, useCallback, useRef, useState } from 'react';
 import socket from 'src/config/SOCKET_CONFIG';
 import container from 'src/container';
+import { AppModal } from 'src/view/components/modal/AppModal';
 import {
     addNewMessage,
+    toggleEmoji,
     updateConversation,
 } from '../../consersationState/actions';
 import { useChat } from '../../consersationState/store';
+import EmojiPicker from './EmojiPicker';
 
 const {
     cradle: { chatService },
@@ -19,7 +23,7 @@ type IProps = {
 const InputPanel: FC<IProps> = ({ cid, uid }) => {
     const chatFieldRef = useRef<any>(null);
     const [state, dispatch] = useChat();
-
+    const { isEmojiShow } = state;
     const [isSending, setSending] = useState(false);
 
     let timeout: any = null;
@@ -63,6 +67,18 @@ const InputPanel: FC<IProps> = ({ cid, uid }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [uid, cid]);
 
+    const onToogleShowEmoji = (): void => {
+        dispatch(toggleEmoji(!isEmojiShow));
+    };
+
+    const onHideEmoji = useCallback((): void => {
+        dispatch(toggleEmoji(false));
+    }, [dispatch]);
+
+    const onSelectPicker = (picker: string): void => {
+        chatFieldRef.current.value += picker;
+    };
+
     return (
         <div className="w-full bg-white flex px-4 w-7/8 self-end pb-6 pt-3">
             <div className="flex-grow flex-shrink flex items-center">
@@ -87,8 +103,15 @@ const InputPanel: FC<IProps> = ({ cid, uid }) => {
                     }}
                     placeholder="Input your message..."
                 />
-                {/* <EmojiPicker /> */}
-                <button className="focus:outline-none -ml-8">
+                {isEmojiShow && (
+                    <AppModal clickOutside={onHideEmoji}>
+                        <EmojiPicker onSelectPicker={onSelectPicker} />
+                    </AppModal>
+                )}
+                <button
+                    onClick={onToogleShowEmoji}
+                    className="focus:outline-none -ml-8"
+                >
                     <svg height="24px" width="24px" viewBox="0 0 26 26">
                         <g fill="none" fillRule="evenodd">
                             <polygon points="0,26 26,26 26,0 0,0 "></polygon>

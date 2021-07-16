@@ -65,12 +65,12 @@ const Register: FC = () => {
                     className="flex items-center justify-center w-full sm:mt-6 mt-4"
                 >
                     <div className="w-75 text-xl">
-                        <InputText
+                        {/* <InputText
                             msg={errors.name}
                             register={register}
                             name="name"
                             placeholder="Họ và tên"
-                        />
+                        /> */}
                         <div className="my-4">
                             <InputText
                                 msg={errors.username}

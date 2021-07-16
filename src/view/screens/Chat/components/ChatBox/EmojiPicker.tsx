@@ -1,15 +1,15 @@
 import Picker from 'emoji-picker-react';
 import React, { FC } from 'react';
-import { useChat } from '../../consersationState/store';
 
-const EmojiPicker: FC = () => {
-    const [state] = useChat();
-    const { inputEvent } = state;
+type IProps = {
+    onSelectPicker: (picker: string) => void;
+};
+
+const EmojiPicker: FC<IProps> = ({ onSelectPicker }) => {
     return (
         <Picker
-            onEmojiClick={(event, emoji) => {
-                console.log(emoji.emoji);
-                console.log(inputEvent);
+            onEmojiClick={(event, emoji): void => {
+                onSelectPicker(emoji.emoji);
             }}
         />
     );

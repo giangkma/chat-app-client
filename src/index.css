@@ -1,0 +1,78 @@
+body {
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: rgb(98, 98, 98);
+}
+input::-ms-reveal,
+input::-ms-clear {
+    display: none;
+}
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}
+
+.categoryChips::-webkit-scrollbar {
+    display: none;
+}
+
+.confirmationText {
+    position: absolute;
+    bottom: 25%;
+}
+
+.line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.new-form-container {
+    width: 460px;
+}
+
+.icon-menu {
+    width: 36px;
+    height: 36px;
+}
+
+.disabled svg path,
+.disabled svg line {
+    stroke: #d0bbaa !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #cacaca;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #858585;
+    border-radius: 10px;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}

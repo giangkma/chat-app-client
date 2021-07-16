@@ -1,0 +1,14 @@
+node_modules/**
+
+.commitlintrc.js
+.eslintrc.js
+.huskyrc.js
+babel.config.js
+metro.config.js
+package.json
+
+Dockerfile
+docker-compose.yml
+
+# generated tailwind css
+src/tailwind.generated.css

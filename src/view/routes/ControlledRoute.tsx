@@ -1,7 +1,7 @@
 /* @flow */
 import React, { FC } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
-import { LoadingCircle } from '../components/loading/Circle';
+import { Spinner } from '../components/loading/Spinner';
 import { useAuth } from '../hooks/useAuth';
 
 interface Props extends RouteProps {
@@ -16,7 +16,7 @@ export const PrivateRoute: FC<Props> = ({
     const { isAuthenticated, isLoading } = useAuth();
 
     if (isLoading) {
-        return <LoadingCircle title="Vennligst vent..." loading={isLoading} />;
+        return <Spinner loading={isLoading} />;
     }
 
     return (
@@ -34,7 +34,7 @@ export const PublicOnlyRoute: FC<Props> = ({
     const { isAuthenticated, isLoading } = useAuth();
 
     if (isLoading) {
-        return <LoadingCircle title="Vennligst vent..." loading={isLoading} />;
+        return <Spinner loading={isLoading} />;
     }
 
     return (

@@ -1,10 +1,4 @@
-import {
-    AuthToken,
-    DataLogin,
-    DataRegister,
-    ResponseAuth,
-    User,
-} from 'src/domain/user';
+import { AuthToken, DataAuth, ResponseAuth, User } from 'src/domain/user';
 import { TypedEvent } from 'src/helper/event';
 import Cookies from 'universal-cookie';
 import { ApiService } from '../api/ApiService';
@@ -25,7 +19,7 @@ export class AuthService {
         this.apiService = apiService;
     }
 
-    async login(data: DataLogin): Promise<ResponseAuth> {
+    async login(data: DataAuth): Promise<ResponseAuth> {
         const res = await this.apiService.post({
             url: 'auth/login',
             data,
@@ -33,7 +27,7 @@ export class AuthService {
         return res.json();
     }
 
-    async register(data: DataRegister): Promise<ResponseAuth> {
+    async register(data: DataAuth): Promise<ResponseAuth> {
         const res = await this.apiService.post({
             url: 'auth/register',
             data,

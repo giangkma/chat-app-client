@@ -1,4 +1,5 @@
 import React, { FC, useEffect } from 'react';
+import { useParams } from 'react-router';
 import socket from 'src/config/SOCKET_CONFIG';
 import { getElementById } from 'src/utils/generalUtils';
 import {
@@ -12,11 +13,15 @@ import MessageList from './MessageList';
 import TitleBar from './TitleBar';
 
 type IProps = {
-    chatId: string;
     userId: string;
 };
+type IParams = {
+    chatId: string;
+};
 
-const ChatBox: FC<IProps> = ({ chatId, userId }) => {
+const ChatBox: FC<IProps> = ({ userId }) => {
+    const { chatId } = useParams<IParams>();
+
     const [state, dispatch] = useChat();
     const { conversations, isReady } = state;
 
@@ -27,6 +32,7 @@ const ChatBox: FC<IProps> = ({ chatId, userId }) => {
     useEffect(() => {
         if (isReady) {
             socket.on('receive-message', ({ conversation, newMessage }) => {
+                console.log('newMessage');
                 const cvs = getElementById(conversation._id, conversations);
                 if (cvs) {
                     if (localStorage.username === conversation.lastSender)
@@ -40,6 +46,10 @@ const ChatBox: FC<IProps> = ({ chatId, userId }) => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isReady]);
+
+    socket.on('giang', string => {
+        console.log(string);
+    });
 
     return (
         <div className="flex-grow flex-shrink flex max-h-full border-l-2 border-gray-200 flex-col">

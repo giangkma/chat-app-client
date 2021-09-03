@@ -18,22 +18,7 @@ export interface User {
     dateAdded: string;
 }
 
-export interface DataLogin {
+export interface DataAuth {
     username: string;
     password: string;
-}
-
-export interface DataRegister extends DataLogin {
-    name: string;
-}
-
-export interface UpdateProfile {
-    name: string;
-    avatar?: string;
-}
-
-export interface ChangePassword {
-    password: string;
-    newPassword: string;
-    reNewPassword: string;
 }

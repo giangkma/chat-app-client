@@ -1,9 +1,9 @@
-import { yupResolver } from '@hookform/resolvers';
 import React, { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
-import { DataLogin } from 'src/domain/user';
-import { LoginForm, LoginFormSchema } from 'src/domain/user/schema';
+import { DataAuth } from 'src/domain/user';
+import { AuthFormInfo } from 'src/domain/user/schema';
+import { classValidatorFormResolverFactory } from 'src/helper/form';
 import { showToatify } from 'src/helper/toat';
 import { Alert } from 'src/view/components/alert';
 import { PrimaryButton } from 'src/view/components/button/PrimaryButton';
@@ -15,6 +15,10 @@ import { useMessageData } from 'src/view/hooks/message';
 import { useIsMountedRef } from 'src/view/hooks/useIsMountedRef';
 import { Screen } from 'src/view/routes/Router';
 
+const authFormInfoValidatorResolver = classValidatorFormResolverFactory<
+    AuthFormInfo
+>(AuthFormInfo);
+
 const Login: FC = () => {
     const history = useHistory();
     const { isSuccess, message, setMessage, clearMessage } = useMessageData();
@@ -22,11 +26,12 @@ const Login: FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const mountedRef = useIsMountedRef();
 
-    const { register, handleSubmit, errors } = useForm<LoginForm>({
-        resolver: yupResolver(LoginFormSchema),
+    const { register, handleSubmit, errors } = useForm<AuthFormInfo>({
+        resolver: authFormInfoValidatorResolver,
+        mode: 'onChange',
     });
 
-    const onSubmit = async (data: DataLogin): Promise<void> => {
+    const onSubmit = async (data: DataAuth): Promise<void> => {
         try {
             setLoading(true);
             await onLogin(data);

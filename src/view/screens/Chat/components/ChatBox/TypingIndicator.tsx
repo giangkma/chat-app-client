@@ -16,7 +16,7 @@ const TypingIndicator: FC<IProps> = ({ name }) => {
             <div className="py-2 px-4 bg-gray-200 rounded-xl">
                 <div className="max-w-xs break-words">
                     <div className="ticontainer">
-                        <div className="tiblock text-opacity-50 text-gray-800">{`${name} Đang nhập ...`}</div>
+                        <div className="tiblock text-opacity-50 text-gray-800">{`${name} đang nhập ...`}</div>
                     </div>
                 </div>
             </div>

@@ -1,9 +1,9 @@
-import { yupResolver } from '@hookform/resolvers';
 import { default as React, FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
-import { DataRegister } from 'src/domain/user';
-import { RegisterForm, RegisterFormSchema } from 'src/domain/user/schema';
+import { DataAuth } from 'src/domain/user';
+import { AuthFormInfo } from 'src/domain/user/schema';
+import { classValidatorFormResolverFactory } from 'src/helper/form';
 import { showToatify } from 'src/helper/toat';
 import { Alert } from 'src/view/components/alert';
 import { PrimaryButton } from 'src/view/components/button/PrimaryButton';
@@ -12,20 +12,26 @@ import { InputText } from 'src/view/components/input/InputText';
 import { Spinner } from 'src/view/components/loading/Spinner';
 import { useAuth } from 'src/view/hooks';
 import { useMessageData } from 'src/view/hooks/message';
+import { useIsMountedRef } from 'src/view/hooks/useIsMountedRef';
 import { Screen } from 'src/view/routes/Router';
+
+const authFormInfoValidatorResolver = classValidatorFormResolverFactory<
+    AuthFormInfo
+>(AuthFormInfo);
 
 const Register: FC = () => {
     const history = useHistory();
     const { onRegister } = useAuth();
     const { isSuccess, message, setMessage, clearMessage } = useMessageData();
+    const mountedRef = useIsMountedRef();
 
     const [loading, setLoading] = useState<boolean>(false);
 
-    const { register, handleSubmit, errors } = useForm<RegisterForm>({
-        resolver: yupResolver(RegisterFormSchema),
+    const { register, handleSubmit, errors } = useForm<AuthFormInfo>({
+        resolver: authFormInfoValidatorResolver,
     });
 
-    const onSubmit = async (data: DataRegister): Promise<void> => {
+    const onSubmit = async (data: DataAuth): Promise<void> => {
         try {
             setLoading(true);
             await onRegister(data);
@@ -34,6 +40,9 @@ const Register: FC = () => {
         } catch (error) {
             setMessage({ message: 'Tên đăng nhập đã tồn tại' });
         } finally {
+            if (!mountedRef.current) {
+                return;
+            }
             setLoading(false);
         }
     };

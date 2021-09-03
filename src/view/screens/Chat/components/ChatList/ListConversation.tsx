@@ -29,7 +29,7 @@ const ListConversation: FC = () => {
     }, [dispatch, myId]);
 
     useEffect(() => {
-        if (conversations) {
+        if (conversations.length) {
             conversations.forEach((item: ConversationInfo) => {
                 socket.emit('user-join-room', { roomId: item._id });
             });
@@ -38,7 +38,7 @@ const ListConversation: FC = () => {
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [chatId]);
+    }, [conversations]);
 
     return (
         <div className="bg-white flex flex-col items-center overflow-y-auto flex-grow ">

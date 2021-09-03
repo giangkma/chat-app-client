@@ -1,19 +1,16 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-// import * as R from 'ramda';
 import React, { ReactNode, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import socket from 'src/config/SOCKET_CONFIG';
 import container from 'src/container';
-import { DataLogin, DataRegister, User } from 'src/domain/user';
-import { Screen } from '../routes/Router';
+import { DataAuth, User } from 'src/domain/user';
 
 interface AuthContext {
     isAuthenticated: boolean;
     isLoading: boolean;
     user: User | undefined;
     setUser: (user: User) => void;
-    onLogin: (data: DataLogin) => void;
-    onRegister: (data: DataRegister) => void;
+    onLogin: (data: DataAuth) => void;
+    onRegister: (data: DataAuth) => void;
     onLogout: () => void;
 }
 
@@ -42,7 +39,7 @@ export const AuthProvider = ({
     const [user, setUser] = useState<User>();
     const [isLoading, setIsLoading] = useState(true);
 
-    const onLogin = async (data: DataLogin): Promise<void> => {
+    const onLogin = async (data: DataAuth): Promise<void> => {
         const res = await authService.login(data);
         socket.emit('user-login', res.information._id);
         authService.saveToken(res.accessToken);
@@ -53,7 +50,7 @@ export const AuthProvider = ({
         localStorage.setItem('userId', res.information._id);
     };
 
-    const onRegister = async (data: DataRegister): Promise<void> => {
+    const onRegister = async (data: DataAuth): Promise<void> => {
         const res = await authService.register(data);
         socket.emit('user-login', res.information._id);
         authService.saveToken(res.accessToken);

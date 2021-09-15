@@ -6,5 +6,5 @@ export default {
 
     // api
     HOST: process.env.REACT_APP_API_HOST,
-    API_PATH: 'api',
+    API_PATH: 'api/v1',
 };

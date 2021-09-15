@@ -7,6 +7,7 @@ import { ReactComponent as LockIconSVG } from './lock.svg';
 import { ReactComponent as TickWhiteIconSVG } from './tick-white.svg';
 import { ReactComponent as SearchIconSVG } from './search-icon.svg';
 import { ReactComponent as TickGreenIconSVG } from './tick-green.svg';
+import { ReactComponent as BarIconSVG } from './bar-icon.svg';
 
 export {
     TickGreenIconSVG,
@@ -18,4 +19,5 @@ export {
     LockIconSVG,
     TickWhiteIconSVG,
     SearchIconSVG,
+    BarIconSVG,
 };

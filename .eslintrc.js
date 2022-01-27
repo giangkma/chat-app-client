@@ -1,4 +1,4 @@
-module.exports = {ss
+module.exports = {
   extends: [
     "react-app",
     // "shared-config",

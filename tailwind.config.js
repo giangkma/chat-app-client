@@ -1,4 +1,4 @@
-module.exports = {
+module.exports = {d
     purge: ['./src/**/*.{js,jsx,ts,tsx}'],
     theme: {
         extend: {
